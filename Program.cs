@@ -30,6 +30,11 @@ namespace OracleConfig
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(startDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
 
+                if (args.Length <= 0)
+                {
+                    throw new DomainException("Argument undefined.");
+                }
+
                 ProcessProg(args[0]);
 
                 TimeSpan endExecute = DateTime.Now.Subtract(startDateTime);
@@ -57,7 +62,8 @@ namespace OracleConfig
 
         static void ProcessProg(string client)
         {
-            IClientJsonService clientJson = new ClientOracleService(client);
+            ClientJsonService cli = new ClientJsonService(client);
+            IClientJsonService clientJson = cli.CreateClientJsonService();
             clientJson.CreateConfig();
         }
     }
