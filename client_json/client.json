@@ -1,0 +1,17 @@
+{
+"cliente": "CLIENTE",
+"dirDump": "F:\\DMP\\CLIENT\\2019-04-05", 
+"fileNameDump": "client_201900405.dmp", 
+"userNameBase": "system",
+"passwordBase": "mypassword",
+"tnsNames": "client",
+"oraInst": "client",
+"baseIPAddress": "127.0.0.1",
+"basePort": 1522,
+"usersDump": ["USUARIO1", "USUARIO2"],
+"passwordUser": "mypassword",
+"tableSpace": "CLIENT",
+"tableSpaceDir": "E:\\Oracle11\\client",
+"remapTableSpaceHabilitado": true,
+"remapTableSpace": ["CLIENT1", "CLIENT2"]
+}
