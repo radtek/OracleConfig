@@ -2,10 +2,10 @@ using OracleConfig.Entities.Exceptions;
 
 namespace OracleConfig.Services
 {
-    class ClientJsonService{
+    class CommandService{
         private ICommandService _commands;
 
-        public ClientJsonService(ICommandService command)
+        public CommandService(ICommandService command)
         {
             if (command == null)
             {
