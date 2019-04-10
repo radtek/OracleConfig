@@ -62,7 +62,7 @@ namespace OracleConfig
 
         static void ProcessProg(string client)
         {
-            ClientJsonService cli = new ClientJsonService(new ClientOracleService(client));
+            ClientJsonService cli = new ClientJsonService(new OracleCommandService(client));
             cli.CreateConfig();
         }
     }

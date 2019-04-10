@@ -1,6 +1,6 @@
 namespace OracleConfig.Services
 {
-    interface IClientJsonService
+    interface ICommandService
     {
         void CreateConfig();
     }

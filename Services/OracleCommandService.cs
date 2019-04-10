@@ -9,12 +9,12 @@ using OracleConfig.Entities.Exceptions;
 
 namespace OracleConfig.Services
 {
-    class ClientOracleService : IClientJsonService
+    class OracleCommandService : ICommandService
     {
         private string _pathCfg;
         private ClientJson _clientJson;
 
-        public ClientOracleService(string client)
+        public OracleCommandService(string client)
         {  
             if (string.IsNullOrWhiteSpace(client)){
                 throw new DomainException("Undefined name client.");
