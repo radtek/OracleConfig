@@ -192,7 +192,7 @@ namespace OracleConfig.Services
                 linhaCmd.AppendLine("FROM");
                 linhaCmd.AppendLine("  DBA_TABLESPACE_USAGE_METRICS");
                 linhaCmd.AppendLine("WHERE");
-                linhaCmd.AppendLine($"  TABLESPACE_NAME IN('SYSTEM', '{tableSpaceName}'");
+                linhaCmd.AppendLine($"  TABLESPACE_NAME IN('SYSTEM', '{tableSpaceName}')");
 
                 linhaCmd.AppendLine();
 

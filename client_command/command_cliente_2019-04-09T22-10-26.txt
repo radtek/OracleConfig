@@ -90,7 +90,7 @@ SELECT
 FROM
   DBA_TABLESPACE_USAGE_METRICS
 WHERE
-  TABLESPACE_NAME IN('SYSTEM', 'CLIENTE'
+  TABLESPACE_NAME IN('SYSTEM', 'CLIENTE')
 
 ===============================================================================================================
 create user USUARIO1 default tablespace CLIENTE identified by mypassword quota unlimited on users;
@@ -110,10 +110,10 @@ create directory CLIENTE as 'F:\DMP\CLIENT\2019-04-05';
 commit;
 
 ===============================================================================================================
-impdp system/mypassword@CLIENT directory=CLIENTE dumpfile=client_201900405.dmp logfile=IMPDP_CLIENTE_2019-04-09T15-50-04.log table_exists_action=replace transform=segment_attributes:n remap_tablespace=(CLIENT1:CLIENT, CLIENT2:CLIENT)  full=y data_options=SKIP_CONSTRAINT_ERRORS
+impdp system/mypassword@CLIENT directory=CLIENTE dumpfile=client_201900405.dmp logfile=IMPDP_CLIENTE_2019-04-09T22-10-26.log table_exists_action=replace transform=segment_attributes:n remap_tablespace=(CLIENT1:CLIENT, CLIENT2:CLIENT)  full=y data_options=SKIP_CONSTRAINT_ERRORS
 
 ===============================================================================================================
-imp system/mypassword@CLIENT fromuser=USUARIO1 touser=USUARIO1 file=client_201900405.dmp log=IMP_CLIENTE_2019-04-09T15-50-04.log ignore=y commit=y
+imp system/mypassword@CLIENT fromuser=USUARIO1 touser=USUARIO1 file=client_201900405.dmp log=IMP_CLIENTE_2019-04-09T22-10-26.log ignore=y commit=y
 
 select max(dt_movimen) from ts_movat
 
