@@ -4,6 +4,7 @@ Create commands to import and export oracle.
 
 REQUIRE
 	.NET CORE 2.2
+	Newtonsoft.Json
 	
 HELP
 	Put config client Json into folder client_json.
