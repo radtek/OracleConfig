@@ -3,21 +3,21 @@ using OracleConfig.Entities.Exceptions;
 namespace OracleConfig.Services
 {
     class ClientJsonService{
-        private string _client;
+        private IClientJsonService _commandCli;
 
-        public ClientJsonService(string client)
+        public ClientJsonService(IClientJsonService client)
         {
-            if (string.IsNullOrWhiteSpace(client))
+            if (client == null)
             {
                 throw new DomainException("Client name undefined.");
             }
 
-            _client = client;
+            _commandCli = client;
         }
 
-        public IClientJsonService CreateClientJsonService()
+        public void CreateConfig()
         {
-            return new ClientOracleService(_client);
+            _commandCli.CreateConfig();
         }
     }
 }

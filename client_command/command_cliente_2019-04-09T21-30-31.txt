@@ -1,0 +1,119 @@
+( Abrir o prompt com permissão de admin )
+---------------------------------------------------------------------------------------------------------------
+
+( Editando o tnsnames.ora )
+---------------------------------------------------------------------------------------------------------------
+
+===============================================================================================================
+CLIENT =
+  (DESCRIPTION =
+    (SOURCE_ROUTE = on)
+    (CONNECT_TIMEOUT = 10) (RETRY_COUNT = 3) (RETRY_DELAY = 2)
+    (COMPRESSION = on)
+    (COMPRESSION_LEVELS = (LEVEL = high))
+    (ADDRESS = (PROTOCOL = TCP) (HOST = 127.0.0.1) (PORT = 1522) (IP = first))
+    (CONNECT_DATA = (SERVER = DEDICATED) (SID = client))
+  )
+===============================================================================================================
+
+( Editando arquivo sqlora.net )
+---------------------------------------------------------------------------------------------------------------
+
+===============================================================================================================
+NAMES.DIRECTORY_PATH= (TNSNAMES, HOSTNAME, LDAP)
+##NAMES.DEFAULT_DOMAIN = ORACLE.COM
+TRACE_LEVEL_CLIENT = ON
+##SQLNET.EXPIRE_TIME = 30
+SQLNET.IDENTIX_FINGERPRINT_DATABASE = FINGRDB
+AUTOMATIC_IPC = ON
+SQLNET.EXPIRE_TIME = 0
+SQLNET.AUTHENTICATION_SERVICES = (ALL)
+SQLNET.CRYPTO_CHECKSUM_CLIENT = ACCEPTED
+##TNSPING.TRACE_DIRECTORY = /oracle/traces
+===============================================================================================================
+
+===============================================================================================================
+sqlplus /nolog
+connect sys/viewinfo@CLIENT as sysdba;
+grant all privileges to system with admin option;
+grant resource, connect, dba, advisor, sysdba, sysoper to system with admin option;
+quit
+
+===============================================================================================================
+sqlplus system/mypassword@CLIENT as sysdba
+set linesize 500;
+set pagesize 1000;
+
+drop user USUARIO1 cascade;
+drop user USUARIO2 cascade;
+commit;
+
+===============================================================================================================
+select distinct
+  owner
+from
+  dba_tables
+where
+  tablespace_name='CLIENTE';
+
+select
+  owner,
+  constraint_name,
+  table_name,
+  index_owner,
+  index_name
+from
+  dba_constraints
+where
+  (index_owner,index_name) in (select owner, index_name from dba_indexes where tablespace_name ='CLIENTE')
+
+drop tablespace CLIENTE including contents and datafiles cascade constraints;
+commit;
+
+create bigfile tablespace CLIENTE datafile 'E:\Oracle11\client\CLIENTE.DBF' size 10000M autoextend on;
+commit;
+
+select
+  username,
+  default_tablespace,
+  temporary_tablespace
+from
+  dba_users
+where
+  username in ('USUARIO1', 'USUARIO2');
+
+SELECT
+  TABLESPACE_NAME,
+  ROUND((USED_SPACE * (8192 / 1048576))) AS USED_SPACE, --Espaço em MB
+  ROUND((TABLESPACE_SIZE * (8192 / 1048576))) AS TABLESPACE_SIZE, --Espaço em MB
+  ROUND(((USED_SPACE / TABLESPACE_SIZE) * 100)) || '%' AS PERCENT_USED
+FROM
+  DBA_TABLESPACE_USAGE_METRICS
+WHERE
+  TABLESPACE_NAME IN('SYSTEM', 'CLIENTE'
+
+===============================================================================================================
+create user USUARIO1 default tablespace CLIENTE identified by mypassword quota unlimited on users;
+grant all privileges to USUARIO1 with admin option;
+grant resource, connect, dba, advisor, sysdba, sysoper to USUARIO1 with admin option;
+
+create user USUARIO2 default tablespace CLIENTE identified by mypassword quota unlimited on users;
+grant all privileges to USUARIO2 with admin option;
+grant resource, connect, dba, advisor, sysdba, sysoper to USUARIO2 with admin option;
+
+commit;
+
+drop directory CLIENTE;
+commit;
+
+create directory CLIENTE as 'F:\DMP\CLIENT\2019-04-05';
+commit;
+
+===============================================================================================================
+impdp system/mypassword@CLIENT directory=CLIENTE dumpfile=client_201900405.dmp logfile=IMPDP_CLIENTE_2019-04-09T21-30-31.log table_exists_action=replace transform=segment_attributes:n remap_tablespace=(CLIENT1:CLIENT, CLIENT2:CLIENT)  full=y data_options=SKIP_CONSTRAINT_ERRORS
+
+===============================================================================================================
+imp system/mypassword@CLIENT fromuser=USUARIO1 touser=USUARIO1 file=client_201900405.dmp log=IMP_CLIENTE_2019-04-09T21-30-31.log ignore=y commit=y
+
+select max(dt_movimen) from ts_movat
+
