@@ -8,7 +8,13 @@ Create commands to import and export oracle.
 	
 ## HELP
 
--	Put config client Json into folder client_json.
+1. Para instalar as dependencias.
+
+	``` shell
+	$ dotnet package add Newtonsoft.Json
+	```
+
+2. Put config client Json into folder client_json.
 	Output commands oracle into folder client_command.
 
 	``` shell
@@ -21,7 +27,7 @@ Create commands to import and export oracle.
 
 #### 2019-04-16 01:08:00 -03:00
 
-*-* Inclusão do extension method ExecutingOfTime 
+*-* Inclusão do extension method ExecutingOfTime e ToIsoStandard na classe DateTimeExtension
 
 #### v1.0.0: 2019-04-09 15:16:00 -03:00
 

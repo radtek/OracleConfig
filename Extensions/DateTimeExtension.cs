@@ -1,7 +1,6 @@
-using System;
 using System.Globalization;
 
-namespace OracleConfig.Extensions
+namespace System
 {
     static class DateTimeExtensions
     {
@@ -9,6 +8,11 @@ namespace OracleConfig.Extensions
         {
             TimeSpan endExecute = DateTime.Now.Subtract(extension);
             return $"Executing of time (seconds): {endExecute.TotalSeconds.ToString("F2", CultureInfo.InvariantCulture)} seconds";
+        }
+
+        public static string ToIsoStandard(this DateTime standard)
+        {
+            return standard.ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
 }
