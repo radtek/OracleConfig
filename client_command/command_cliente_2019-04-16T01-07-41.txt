@@ -110,9 +110,9 @@ create directory CLIENTE as 'F:\DMP\CLIENT\2019-04-05';
 commit;
 
 ===============================================================================================================
-impdp system/mypassword@CLIENT directory=CLIENTE dumpfile=client_201900405.dmp logfile=IMPDP_CLIENTE_2019-04-10T22-51-08.log table_exists_action=replace transform=segment_attributes:n remap_tablespace=(
+impdp system/mypassword@CLIENT directory=CLIENTE dumpfile=client_201900405.dmp logfile=IMPDP_CLIENTE_2019-04-16T01-07-41.log table_exists_action=replace transform=segment_attributes:n remap_tablespace=(
 CLIENT1:CLIENT, CLIENT2:CLIENT)  full=y data_options=SKIP_CONSTRAINT_ERRORS
 
 ===============================================================================================================
-imp system/mypassword@CLIENT fromuser=USUARIO1 touser=USUARIO1 file=client_201900405.dmp log=IMP_CLIENTE_2019-04-10T22-51-08.log ignore=y commit=y
+imp system/mypassword@CLIENT fromuser=USUARIO1 touser=USUARIO1 file=client_201900405.dmp log=IMP_CLIENTE_2019-04-16T01-07-41.log ignore=y commit=y
 

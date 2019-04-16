@@ -5,6 +5,7 @@ using Newtonsoft.Json.Serialization;
 
 using OracleConfig.Entities.Exceptions;
 using OracleConfig.Services;
+using OracleConfig.Extensions;
 
 namespace OracleConfig
 {
@@ -37,8 +38,9 @@ namespace OracleConfig
 
                 ProcessProg(args[0]);
 
-                TimeSpan endExecute = DateTime.Now.Subtract(startDateTime);
-                Console.WriteLine($"Executing of time (seconds): {endExecute.TotalSeconds.ToString("F2", CultureInfo.InvariantCulture)} seconds");
+                //TimeSpan endExecute = DateTime.Now.Subtract(startDateTime);
+                //Console.WriteLine($"Executing of time (seconds): {endExecute.TotalSeconds.ToString("F2", CultureInfo.InvariantCulture)} seconds");
+                Console.WriteLine(startDateTime.ExecutingOfTime());
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Command generator completed.");

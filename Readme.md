@@ -11,13 +11,21 @@ Create commands to import and export oracle.
 -	Put config client Json into folder client_json.
 	Output commands oracle into folder client_command.
 
-	```
+	``` shell
 	$ dotnet OracleConfig.dll client
 	```
 
 # RELEASES
 
-### v1.0.0: 2019-04-09 15:16:00 -03:00
+## v1.0.1
+
+#### 2019-04-16 01:08:00 -03:00
+
+*-* Inclusão do extension method ExecutingOfTime 
+
+#### v1.0.0: 2019-04-09 15:16:00 -03:00
+
+*-* Iniciando o projeto
 	
 ```
 Author: Robson Candido dos Santos Alves <robsondesenvolvimento@gmail.com>
