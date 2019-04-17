@@ -13,6 +13,10 @@ Create commands to import and export oracle.
 	``` shell
 	$ dotnet package add Newtonsoft.Json
 	```
+	
+	``` shell
+	$ nuget install packages.config
+	```
 
 2. Put config client Json into folder client_json.
 	Output commands oracle into folder client_command.
