@@ -37,6 +37,8 @@ namespace OracleConfig
 
                 ProcessProg(args[0]);
 
+                //ProcessProg("client");
+
                 Console.WriteLine(startDateTime.ExecutingOfTime());
 
                 Console.ForegroundColor = ConsoleColor.Green;

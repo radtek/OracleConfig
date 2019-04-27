@@ -112,10 +112,7 @@ namespace OracleConfig.Services
             linhaCmd.AppendLine("set pagesize 1000;");
             linhaCmd.AppendLine();
 
-            foreach (string usuario in _clientJson.UsersDump)
-            {
-                linhaCmd.AppendLine($"drop user {usuario} cascade;");
-            }
+            _clientJson.UsersDump.ToList().ForEach(x => linhaCmd.AppendLine($"drop user {x} cascade;"));
 
             linhaCmd.AppendLine("commit;");
 
@@ -154,7 +151,6 @@ namespace OracleConfig.Services
             linhaCmd.AppendLine("commit;");
 
             linhaCmd.AppendLine();
-
             
             linhaCmd.AppendLine("select"); 
             linhaCmd.AppendLine("  username,"); 
@@ -165,16 +161,9 @@ namespace OracleConfig.Services
             linhaCmd.AppendLine("where"); 
             linhaCmd.Append("  username in (");
 
-            var ultimoUser = _clientJson.UsersDump.Last();
+            _clientJson.UsersDump.ToList().ForEach(x => linhaCmd.Append($"'{x}',"));
 
-            foreach (string user in _clientJson.UsersDump)
-            {
-                linhaCmd.Append($"'{user}'");
-                if (ultimoUser != user)
-                {
-                    linhaCmd.Append(", ");
-                }
-            }
+            linhaCmd.Remove(linhaCmd.Length - 1, 1);
 
             linhaCmd.AppendLine(");");
 
@@ -237,20 +226,15 @@ namespace OracleConfig.Services
                 return string.Empty;
             }
 
-            StringBuilder linhaCmd = new StringBuilder();
+            StringBuilder linhaCmd = new StringBuilder();            
 
-            linhaCmd.AppendLine("remap_tablespace=(");
+            linhaCmd.Append("remap_tablespace=(");
 
-            var ultimo = config.RemapTablespace.Last();
+            Action<string, ClientJson> remap = (x,y) => linhaCmd.Append($"{x}:{y.Tablespace},");
 
-            foreach (var table in config.RemapTablespace)
-            {
-                linhaCmd.Append($"{table}:{config.Tablespace}");
-                if(table != ultimo)
-                {
-                    linhaCmd.Append(", ");
-                }
-            }
+            config.RemapTablespace.ToList().ForEach(x => remap(x, config));
+
+            linhaCmd.Remove(linhaCmd.Length - 1, 1);
 
             linhaCmd.Append(") ");            
 

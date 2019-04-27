@@ -29,6 +29,10 @@ Create commands to import and export oracle.
 
 ## v1.0.1
 
+#### 2019-04-26 22:08:00 -03:00
+
+*-* Ajustes em algoritmos de foreach para Lambda
+
 #### 2019-04-16 01:08:00 -03:00
 
 *-* Inclusão do extension method ExecutingOfTime e ToIsoStandard na classe DateTimeExtension
